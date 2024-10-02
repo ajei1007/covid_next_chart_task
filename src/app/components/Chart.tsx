@@ -9,6 +9,11 @@ interface Data {
     Value: number;
 }
 
+interface CovidData {
+    date: string;
+    metric_value: number;
+}
+
 interface ChartComponentProps {
     url: string;
     type: string;
@@ -22,7 +27,7 @@ export function ChartComponent({ url, type }: ChartComponentProps) {
         async function getData() {
             const data = await fetchCovidData(url);
             if (data) {
-                const transformedData = data.map((item: any) => ({
+                const transformedData = data.map((item: CovidData) => ({
                     Date: item.date,
                     Value: item.metric_value,
                 }));
