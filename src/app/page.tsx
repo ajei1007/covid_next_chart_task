@@ -13,12 +13,11 @@ const remoteAPIURL = process.env.NEXT_PUBLIC_REMOTE_API;
 
 export default function Home() {
   const [notesCount] = useState(3);
-  const [like, setLike] = useState<{ [key: number]: boolean }>({});
+  const [like, setLike] = useState<{ [key: string]: boolean }>({});
 
-  const covidData_2023 = `${remoteAPIURL}?year=2024&page_size=365`;
   const covidData_2024 = `${remoteAPIURL}?year=2024&page_size=365`;
 
-  const handleLikeClick = (year: number) => {
+  const handleLikeClick = (year: string) => {
     setLike((prevLikes) => ({ ...prevLikes, [year]: !prevLikes[year] }));
   };
 
@@ -43,9 +42,9 @@ export default function Home() {
               <DataCard
                 title="Column Chart"
                 chartType="column"
-                dataUrl={covidData_2023}
-                liked={like[2023] || false}
-                onLikeClick={() => handleLikeClick(2023)}
+                dataUrl={covidData_2024}
+                liked={like['column'] || false}
+                onLikeClick={() => handleLikeClick('column')}
               />
             </Col>
             <Col xs={24} md={12}>
@@ -53,8 +52,8 @@ export default function Home() {
                 title="Line Chart"
                 chartType="line"
                 dataUrl={covidData_2024}
-                liked={like[2024] || false}
-                onLikeClick={() => handleLikeClick(2024)}
+                liked={like['line'] || false}
+                onLikeClick={() => handleLikeClick('line')}
               />
             </Col>
           </Row>
