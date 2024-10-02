@@ -6,7 +6,7 @@ import { ChartComponent } from './Chart';
 
 interface DataCardProps {
     title: string;
-    chartType: "line" | "column";
+    chartType: string;
     dataUrl: string;
     liked: boolean;
     onLikeClick: () => void;

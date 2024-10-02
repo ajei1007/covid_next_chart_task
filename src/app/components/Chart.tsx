@@ -11,7 +11,7 @@ interface Data {
 
 interface ChartComponentProps {
     url: string;
-    type: "line" | "column";
+    type: string;
 }
 
 export function ChartComponent({ url, type }: ChartComponentProps) {
