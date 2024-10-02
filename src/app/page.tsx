@@ -1,19 +1,63 @@
 "use client";
 
 import 'antd/dist/reset.css';
-import { Layout } from 'antd';
-import ''
+import { Layout, Typography, Row, Col, Button, Space } from 'antd';
+import { DownloadOutlined, FilterOutlined, AlignLeftOutlined } from '@ant-design/icons';
+import { useState } from 'react';
+import { DataCard } from './components/DataCard';
 
 const { Header, Content } = Layout;
+const { Title } = Typography;
+
+const remoteAPIURL = process.env.NEXT_PUBLIC_REMOTE_API;
 
 export default function Home() {
+  const [notesCount] = useState(3);
+  const [like, setLike] = useState<{ [key: number]: boolean }>({});
+
+  const covidData_2023 = `${remoteAPIURL}?year=2023&page_size=365`;
+  const covidData_2024 = `${remoteAPIURL}?year=2024&page_size=365`;
+
+  const handleLikeClick = (year: number) => {
+    setLike((prevLikes) => ({ ...prevLikes, [year]: !prevLikes[year] }));
+  };
+
   return (
     <main>
-      <Layout style={{ height: '100vh'}}>
-        <Header style={{ background: '#ffffff' }}>
-          <div>App Title</div>
+      <Layout style={{ height: '100vh' }}>
+        <Header style={{ background: '#ffffff', padding: '0 20px', display: 'flex', alignItems: 'center' }}>
+          <Title level={3} style={{ margin: 0 }}>Covid-19</Title>
         </Header>
-        <Content>
+        <Content style={{ padding: '20px 10%' }}>
+          <Row justify="space-between" align="middle" style={{ marginBottom: '20px' }}>
+            <Title level={4} style={{ margin: 0 }}>Covid-19 Testing Positivity 7-Day Rolling</Title>
+            <Space>
+              <Button icon={<DownloadOutlined />}>Export to PDF</Button>
+              <Button icon={<AlignLeftOutlined />}>{`Notes (${notesCount})`}</Button>
+              <Button icon={<FilterOutlined />}>Filter</Button>
+            </Space>
+          </Row>
+
+          <Row gutter={[16, 16]}>
+            <Col xs={24} md={12}>
+              <DataCard
+                title="2023"
+                chartType="column"
+                dataUrl={covidData_2023}
+                liked={like[2023] || false}
+                onLikeClick={() => handleLikeClick(2023)}
+              />
+            </Col>
+            <Col xs={24} md={12}>
+              <DataCard
+                title="2024"
+                chartType="line"
+                dataUrl={covidData_2024}
+                liked={like[2024] || false}
+                onLikeClick={() => handleLikeClick(2024)}
+              />
+            </Col>
+          </Row>
         </Content>
       </Layout>
     </main>

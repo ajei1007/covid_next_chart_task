@@ -35,6 +35,19 @@ a {
   text-decoration: none;
 }
 
+.flex {
+  display: flex;
+}
+
+.justify-between {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
