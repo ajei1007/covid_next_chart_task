@@ -70,7 +70,7 @@ export function ChartComponent({ url, type }: ChartComponentProps) {
                     .line()
                     .encode('x', 'Date')
                     .encode('y', 'Value');
-            } else {
+            } else if (type === "column") {
                 chart
                     .interval()
                     .encode('x', 'Date')

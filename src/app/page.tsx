@@ -15,7 +15,7 @@ export default function Home() {
   const [notesCount] = useState(3);
   const [like, setLike] = useState<{ [key: number]: boolean }>({});
 
-  const covidData_2023 = `${remoteAPIURL}?year=2023&page_size=365`;
+  const covidData_2023 = `${remoteAPIURL}?year=2024&page_size=365`;
   const covidData_2024 = `${remoteAPIURL}?year=2024&page_size=365`;
 
   const handleLikeClick = (year: number) => {
@@ -41,7 +41,7 @@ export default function Home() {
           <Row gutter={[16, 16]}>
             <Col xs={24} md={12}>
               <DataCard
-                title="2023"
+                title="Column Chart"
                 chartType="column"
                 dataUrl={covidData_2023}
                 liked={like[2023] || false}
@@ -50,7 +50,7 @@ export default function Home() {
             </Col>
             <Col xs={24} md={12}>
               <DataCard
-                title="2024"
+                title="Line Chart"
                 chartType="line"
                 dataUrl={covidData_2024}
                 liked={like[2024] || false}
